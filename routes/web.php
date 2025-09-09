@@ -1,31 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Aquí registras tus rutas web para tu aplicación. Estas
+| rutas son cargadas por el RouteServiceProvider dentro del grupo
+| que contiene el middleware "web". ¡Crea algo grandioso!
 |
 */
-
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', function () {
-    return "List products";
-});
-
-Route::get('/products/{id}/{category?}', function ($id, $category = null) {
-    if ($category != null) {
-        return "Detail product: " . $id . " with category: " . $category;
-    } else {
-        return "Detail product: " . $id;
-    }
-});
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/create}', [ProductController::class, 'create']);
+Route::get('/products/{id}/{category?}', [ProductController::class, 'detail']);
