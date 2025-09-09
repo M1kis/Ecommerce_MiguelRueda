@@ -9,16 +9,20 @@ class ProductController extends Controller
     // Método para listar productos
     public function index()
     {
-        return "List products";
+        return view("index");
     }
 
     // Método para mostrar el detalle de un producto
     public function detail($id, $category = null)
     {
         if ($category != null) {
-            return "Detail product: " . $id . " with category: " . $category;
+            return view("products.detail",[
+            'id'=> $id,
+            'category' => $category]);
         } else {
-            return "Detail product: " . $id;
+            return view("products.detail",[
+                'id'=> $id, 
+                'category' => ""]);
         }
     }
     function create (){
