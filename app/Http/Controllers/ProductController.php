@@ -44,7 +44,7 @@ class ProductController extends Controller
     // Mostrar todos los productos
     public function index()
     {
-        return view("index", ["products" => $this->products]);
+        return view("products.index", ["products" => $this->products]);
     }
 
     // Mostrar detalle de un producto

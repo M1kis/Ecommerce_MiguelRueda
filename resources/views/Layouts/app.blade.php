@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ecommerce</title>
+    <title>@yield('title', 'Mi Tienda')</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-@include('navbar')
+<body class="bg-gray-50 font-sans">
 
-    @yield('content')
+    {{-- Navbar --}}
+    @include('Layouts.navbar')
 
-@include('footer')
+    <main class="container mx-auto px-6 py-8">
+        @yield('content')
+    </main>
+
+    {{-- Footer --}}
+    @include('Layouts.footer')
 
 </body>
 </html>
