@@ -3,23 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-
     public function run()
     {
-        $categoryPhones = new Category();
-        $categoryPhones->name ='Phones';
-        $categoryPhones->save();
+        // Categorías fijas
+        Category::create(['name' => 'Phones']);
+        Category::create(['name' => 'Computers']);
 
-        $categoryComputers = new Category();
-        $categoryComputers->name ='Computers';
-        $categoryComputers->save();
-
-        Category::factory(200)->create();
-
+        // Workaround: usar la clase del factory directamente
+        CategoryFactory::new()->count(200)->create();
     }
 }
