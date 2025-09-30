@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('url-image');
             $table->string('category');
             $table->timestamps();
+
+            $table->foreignId('category_id')->references('id')->on('categories');
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 };
