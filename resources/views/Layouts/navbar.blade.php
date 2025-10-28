@@ -4,13 +4,14 @@
         {{-- 🔷 Logo + Título --}}
         <a href="{{ url('/products') }}" class="flex items-center space-x-3">
             <img src="{{ asset('images/logo_universidad.png') }}" alt="Logo Universidad" class="h-10 w-auto">
-            <span class="text-xl font-bold text-gray-800"> Mi Tienda</span>
+            <span class="text-xl font-bold text-gray-800">Mi Tienda</span>
         </a>
 
         {{-- 🔹 Enlaces principales --}}
         <div class="flex items-center space-x-6">
             <a href="{{ url('/products') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Inicio</a>
             <a href="{{ url('/products/create') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Crear Producto</a>
+            <a href="{{ url('/admin') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Admin</a>
 
             {{-- 🔸 Zona de autenticación --}}
             @guest
