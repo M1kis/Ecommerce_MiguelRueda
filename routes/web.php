@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -21,4 +22,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->controller(AdminController::class)->group(function () {
     Route::get('/', 'index')->name('admin.index');
+});
+
+Route::prefix('admin/categories')->controller(CategoryController::class)->group(function () {
+    Route::get('/', 'create')->name('admin.categories.create');
 });
