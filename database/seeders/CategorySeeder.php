@@ -10,11 +10,16 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
-        // Categorías fijas
-        Category::create(['name' => 'Phones']);
-        Category::create(['name' => 'Computers']);
+        $categoryPhones = new Category();
+        $categoryPhones->name = 'Phones';
+        $categoryPhones->save();
 
-        // Workaround: usar la clase del factory directamente
-        CategoryFactory::new()->count(200)->create();
+        $categoryComputers = new Category();
+        $categoryComputers->name = 'Computers';
+        $categoryComputers->save();
+
+        Category::factory()->count(200)->create();
     }
+
+
 }
