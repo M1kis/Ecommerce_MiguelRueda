@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -64,6 +66,12 @@ class ProductController extends Controller
     // Vista para crear producto
     public function create()
     {
-        return view("products.create");
+        $categories = Category::orderBy('name')->get();
+        $brands = Brand::orderBy('name')->get();
+        
+        return view("products.create", [
+            'categories' => $categories,
+            'brands' => $brands
+        ]);
     }
 }

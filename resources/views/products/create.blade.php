@@ -1,41 +1,89 @@
-@extends('Layouts.app')
+@extends('admin.layouts.app')
 
-@section('title', 'Crear Producto')
+@section('title', 'Create Product')
 
 @section('content')
-    <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Añadir Nuevo Producto</h1>
+<div class="min-h-screen bg-gray-50 px-4 py-12">
+    <div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 sm:p-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-10">Add New Product</h1>
 
-    <form action="#" method="POST" class="max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-8 space-y-6">
-        @csrf
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Nombre del producto</label>
-            <input type="text" name="name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 outline-none">
-        </div>
+        <form action="#" method="POST">
+            @csrf
 
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Descripción</label>
-            <textarea name="description" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 outline-none"></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Precio</label>
-                <input type="number" name="price" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 outline-none">
+            {{-- PRODUCT NAME --}}
+            <div class="input-group input-group-outline mb-3">
+                <input 
+                    type="text" 
+                    name="name" 
+                    class="form-control" 
+                    placeholder="Enter product name"
+                >
             </div>
 
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Categoría</label>
-                <input type="text" name="category" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 outline-none">
+            {{-- DESCRIPTION --}}
+            <div class="input-group input-group-outline mb-3">
+                <textarea 
+                    name="description" 
+                    rows="3" 
+                    class="form-control" 
+                    placeholder="Write a short product description..."
+                ></textarea>
             </div>
-        </div>
 
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Imagen (URL)</label>
-            <input type="text" name="image" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 outline-none">
-        </div>
+            {{-- PRICE --}}
+            <div class="input-group input-group-outline mb-3">
+                <input 
+                    type="number" 
+                    name="price" 
+                    class="form-control" 
+                    placeholder="0.00"
+                >
+            </div>
 
-        <button type="submit" class="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800 transition text-lg">
-            ➕ Crear Producto
-        </button>
-    </form>
+            {{-- CATEGORY --}}
+            <div class="input-group input-group-outline mb-3">
+                <select class="form-control" id="productCategory" name="category_id">
+                    <option value="" selected disabled>Select a category</option>
+                    @foreach ($categories as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- BRAND --}}
+            <div class="input-group input-group-outline mb-3">
+                <select name="brand_id" class="form-control">
+                    <option selected disabled>Select a brand</option>
+                    @if (isset($brands) && count($brands) > 0)
+                        @foreach ($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
+                    @else
+                        <option disabled>No brands available</option>
+                    @endif
+                </select>
+            </div>
+
+            {{-- IMAGE --}}
+            <div class="input-group input-group-outline mb-3">
+                <input 
+                    type="text" 
+                    name="image" 
+                    class="form-control" 
+                    placeholder="https://example.com/product.png"
+                >
+            </div>
+
+            {{-- SUBMIT BUTTON --}}
+            <div class="mt-6">
+                <button 
+                    type="submit" 
+                    class="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800 transition font-semibold text-lg"
+                >
+                    ➕ Create Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

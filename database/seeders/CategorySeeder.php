@@ -10,15 +10,8 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
-        $categoryPhones = new Category();
-        $categoryPhones->name = 'Phones';
-        $categoryPhones->save();
 
-        $categoryComputers = new Category();
-        $categoryComputers->name = 'Computers';
-        $categoryComputers->save();
-
-        Category::factory()->count(200)->create();
+        Category::factory()->count(20)->create();
     }
 
 
