@@ -3,11 +3,12 @@
 @section('title', 'Create Product')
 
 @section('content')
-<div class="min-h-screen bg-gray-50 px-4 py-12">
-    <div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 sm:p-10">
+<div class="min-h-screen bg-gray-50 px-4 py-0 flex items-start justify-center">
+    <div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 sm:p-10 mt-0">
         <h1 class="text-4xl font-extrabold text-gray-900 mb-10">Add New Product</h1>
 
-        <form action="#" method="POST">
+
+        <form action="{{ route('admin.products.store') }}" method="POST">
             @csrf
 
             {{-- PRODUCT NAME --}}
@@ -42,7 +43,7 @@
 
             {{-- CATEGORY --}}
             <div class="input-group input-group-outline mb-3">
-                <select class="form-control" id="productCategory" name="category_id">
+                <select class="form-control" id="productCategory" name="category">
                     <option value="" selected disabled>Select a category</option>
                     @foreach ($categories as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -52,26 +53,12 @@
 
             {{-- BRAND --}}
             <div class="input-group input-group-outline mb-3">
-                <select name="brand_id" class="form-control">
+                <select class="form-control" id="productBrand" name="brand">
                     <option selected disabled>Select a brand</option>
-                    @if (isset($brands) && count($brands) > 0)
-                        @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @foreach ($brands as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
-                    @else
-                        <option disabled>No brands available</option>
-                    @endif
                 </select>
-            </div>
-
-            {{-- IMAGE --}}
-            <div class="input-group input-group-outline mb-3">
-                <input 
-                    type="text" 
-                    name="image" 
-                    class="form-control" 
-                    placeholder="https://example.com/product.png"
-                >
             </div>
 
             {{-- SUBMIT BUTTON --}}

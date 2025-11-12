@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Product; // ✅ Importar el modelo
 
 class ProductController extends Controller
 {
@@ -43,13 +44,11 @@ class ProductController extends Controller
         ],
     ];
 
-    // Mostrar todos los productos
     public function index()
     {
         return view("products.index", ["products" => $this->products]);
     }
 
-    // Mostrar detalle de un producto
     public function detail($id, $category = null)
     {
         $product = $this->products[$id] ?? null;
@@ -63,15 +62,32 @@ class ProductController extends Controller
         ]);
     }
 
-    // Vista para crear producto
     public function create()
     {
-        $categories = Category::orderBy('name')->get();
-        $brands = Brand::orderBy('name')->get();
-        
+        $categories = Category::all();
+        $brands = Brand::all();
+
         return view("products.create", [
             'categories' => $categories,
             'brands' => $brands
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $product = new Product();
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->price = $request->get('price');
+        $product->category_id = $request->get('category'); 
+        $product->brand_id = $request->get('brand');       
+        //$product->image = $request->get('image');
+
+        $product->save();
+
+        return response()->json([
+            'message' => 'Producto guardado correctamente',
+            'data' => $product
         ]);
     }
 }
