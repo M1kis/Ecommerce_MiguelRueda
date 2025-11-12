@@ -18,18 +18,26 @@
                     name="name" 
                     class="form-control" 
                     placeholder="Enter product name"
+                    value="{{old('name')}}"
                 >
+                @error('name')
+                    <small class="text-danger">{{ $message }} </small>
+                @enderror
             </div>
 
             {{-- DESCRIPTION --}}
-            <div class="input-group input-group-outline mb-3">
-                <textarea 
-                    name="description" 
-                    rows="3" 
-                    class="form-control" 
-                    placeholder="Write a short product description..."
-                ></textarea>
-            </div>
+<div class="input-group input-group-outline mb-3">
+    <textarea 
+        name="description" 
+        rows="3" 
+        class="form-control" 
+        placeholder="Write a short product description..."
+    >{{ old('description') }}</textarea>
+    @error('description')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+</div>
+
 
             {{-- PRICE --}}
             <div class="input-group input-group-outline mb-3">
@@ -38,7 +46,12 @@
                     name="price" 
                     class="form-control" 
                     placeholder="0.00"
+                    value="{{old('price')}}"
+
                 >
+                @error('price')
+                    <small class="text-danger">{{ $message }} </small>
+                @enderror
             </div>
 
             {{-- CATEGORY --}}
@@ -49,6 +62,9 @@
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
+                @error('category')
+                    <small class="text-danger">{{ $message }} </small>
+                @enderror
             </div>
 
             {{-- BRAND --}}
@@ -59,6 +75,9 @@
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                 </select>
+                @error('brand')
+                    <small class="text-danger">{{ $message }} </small>
+                @enderror
             </div>
 
             {{-- SUBMIT BUTTON --}}
