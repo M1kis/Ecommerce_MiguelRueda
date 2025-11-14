@@ -27,11 +27,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');        // Guardar categoría
 
     // PRODUCTOS
-    Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');              // Listar productos
+    Route::get('/products', [ProductController::class, 'table'])->name('admin.products.index');              // Listar productos (tabla)
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');     // Mostrar formulario
-    Route::post('/products', [ProductController::class, 'store'])->name('admin.products.store');             // Guardar producto
+    Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');             // Guardar producto
 
     // BRANDS 🆕
     Route::get('/brands/create', [BrandController::class, 'create'])->name('admin.brands.create');           // Mostrar formulario
     Route::post('/brands', [BrandController::class, 'store'])->name('admin.brands.store');                   // Guardar marca
+    
 });
+

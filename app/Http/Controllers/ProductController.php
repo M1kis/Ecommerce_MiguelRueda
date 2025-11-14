@@ -100,4 +100,14 @@ class ProductController extends Controller
             'data' => $product
         ]);
     }
+
+    public function table()
+    {
+        $products = Product::with(['brand', 'category'])->get();
+        
+        return view('products.table', [
+            'products' => $products
+        ]);
+    }
+
 }
