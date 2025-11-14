@@ -6,32 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+
+            // Datos del producto
             $table->string('name');
             $table->text('description');
-            $table->decimal('price');
+            // Precio amplio: hasta 9,999,999,999.99 (12 dígitos totales, 2 decimales)
+            $table->decimal('price', 12, 2);
+            // Evitar guiones en el nombre de columna (antes 'url-image')
             $table->string('url_image')->nullable();
-            $table->timestamps();
 
-            $table->foreignId('category_id')->references('id')->on('categories');
-            $table->foreignId('brand_id')->references('id')->on('brand');
+            // Claves foráneas
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            // La tabla es 'brands' (plural)
+            $table->foreignId('brand_id')->constrained('brand')->cascadeOnDelete();
+
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

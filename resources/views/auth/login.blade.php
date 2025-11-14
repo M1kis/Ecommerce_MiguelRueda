@@ -1,51 +1,98 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4">
-    <div class="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f3f4f6;padding:48px 16px;">
+  <div style="width:100%;max-width:420px;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.06);padding:24px 22px;">
+    <h2 style="margin:0 0 8px 0;font-size:22px;font-weight:800;text-align:center;color:#1f2937;">Iniciar sesión</h2>
+    <p style="margin:0 0 20px 0;font-size:13px;color:#6b7280;text-align:center;">Bienvenido de nuevo, ingresa tus credenciales.</p>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <form method="POST" action="{{ route('login') }}" novalidate>
+      @csrf
 
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-medium mb-1">Correo electrónico</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                @error('email')
-                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
-                @enderror
-            </div>
+      <!-- Email -->
+      <div style="margin-bottom:14px;">
+        <label for="email" style="display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px;">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          value="{{ old('email') }}"
+          required
+          autocomplete="username"
+          aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}"
+          style="display:block;width:100%;padding:10px 12px;border:1px solid {{ $errors->has('email') ? '#ef4444' : '#cbd5e1' }};border-radius:10px;background:#fff;color:#0f172a;font-size:14px;box-shadow:0 1px 1px rgba(0,0,0,.02);outline:none;"
+          onfocus="this.style.borderColor='#111827'; this.style.boxShadow='0 0 0 3px rgba(17,24,39,.10)';"
+          onblur="this.style.borderColor='{{ $errors->has('email') ? '#ef4444' : '#cbd5e1' }}'; this.style.boxShadow='0 1px 1px rgba(0,0,0,.02)';"
+        />
+        @error('email')
+          <span style="display:block;margin-top:6px;font-size:12px;color:#dc2626;">{{ $message }}</span>
+        @enderror
+      </div>
 
-            <div class="mb-6">
-                <label for="password" class="block text-gray-700 font-medium mb-1">Contraseña</label>
-                <input id="password" type="password" name="password" required
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                @error('password')
-                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
-                @enderror
-            </div>
+      <!-- Password -->
+      <div style="margin-bottom:8px;">
+        <label for="password" style="display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px;">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          required
+          autocomplete="current-password"
+          aria-invalid="{{ $errors->has('password') ? 'true' : 'false' }}"
+          style="display:block;width:100%;padding:10px 12px;border:1px solid {{ $errors->has('password') ? '#ef4444' : '#cbd5e1' }};border-radius:10px;background:#fff;color:#0f172a;font-size:14px;box-shadow:0 1px 1px rgba(0,0,0,.02);outline:none;"
+          onfocus="this.style.borderColor='#111827'; this.style.boxShadow='0 0 0 3px rgba(17,24,39,.10)';"
+          onblur="this.style.borderColor='{{ $errors->has('password') ? '#ef4444' : '#cbd5e1' }}'; this.style.boxShadow='0 1px 1px rgba(0,0,0,.02)';"
+        />
+        @error('password')
+          <span style="display:block;margin-top:6px;font-size:12px;color:#dc2626;">{{ $message }}</span>
+        @enderror
+      </div>
 
-            <div class="flex items-center justify-between mb-4">
-                <label class="flex items-center text-sm text-gray-600">
-                    <input type="checkbox" name="remember" class="rounded text-blue-600 mr-2">
-                    Recuérdame
-                </label>
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
-                @endif
-            </div>
+      <!-- Remember + Forgot -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 16px 0;">
+        <label style="display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#64748b;user-select:none;cursor:pointer;">
+          <input type="checkbox" name="remember" style="width:16px;height:16px;border:1px solid #cbd5e1;border-radius:4px;">
+          Recuérdame
+        </label>
 
-            <button type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200">
-                Ingresar
-            </button>
-        </form>
+        @if (Route::has('password.request'))
+          <a href="{{ route('password.request') }}"
+             style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:600;"
+             onmouseover="this.style.textDecoration='underline'"
+             onmouseout="this.style.textDecoration='none'">
+            ¿Olvidaste tu contraseña?
+          </a>
+        @endif
+      </div>
 
-        <p class="mt-6 text-center text-sm text-gray-600">
-            ¿No tienes una cuenta?
-            <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-medium">Regístrate aquí</a>
-        </p>
+      <!-- Submit -->
+      <button type="submit"
+              style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid #111827;background:#111827;color:#ffffff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:background .15s;"
+              onmouseover="this.style.background='#1f2937';"
+              onmouseout="this.style.background='#111827';"
+              onfocus="this.style.boxShadow='0 0 0 3px rgba(17,24,39,.25)';"
+              onblur="this.style.boxShadow='0 1px 2px rgba(0,0,0,.06)'">
+        Ingresar
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div style="display:flex;align-items:center;gap:12px;margin:16px 0;">
+      <div style="height:1px;background:#e5e7eb;flex:1;"></div>
+      <span style="font-size:12px;color:#9ca3af;">o</span>
+      <div style="height:1px;background:#e5e7eb;flex:1;"></div>
     </div>
+
+    <!-- Register CTA -->
+    <p style="margin:0;text-align:center;font-size:13px;color:#6b7280;">
+      ¿No tienes una cuenta?
+      <a href="{{ route('register') }}"
+         style="color:#1d4ed8;text-decoration:none;font-weight:700;"
+         onmouseover="this.style.textDecoration='underline'"
+         onmouseout="this.style.textDecoration='none'">
+        Regístrate aquí
+      </a>
+    </p>
+  </div>
 </div>
 @endsection

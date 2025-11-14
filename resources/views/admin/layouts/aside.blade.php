@@ -2,9 +2,9 @@
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
       aria-hidden="true" id="iconSidenav"></i>
-    <a class="navbar-brand px-4 py-3 m-0" href="https://demos.creative-tim.com/material-dashboard/pages/dashboard" target="_blank">
+    <a class="navbar-brand px-4 py-3 m-0" href="{{ route('products.index') }}">
       <img style="max-height: fit-content!important;" src="{{ asset('assets/img/logos/LogoUNAB/unab_logo.png') }}"
-        alt="Ecommerce UNAB" class="img-fluid border-radius-lg shadow-sm">
+        alt="Ecommerce UNAB" class="img-fluid">
     </a>
   </div>
 
@@ -51,12 +51,8 @@
   <div class="sidenav-footer position-absolute w-100 bottom-0">
     <div class="mx-3">
       <a class="btn bg-gradient-primary w-100 mb-2" href="{{ route('products.index') }}" type="button">
-        <i class="material-symbols-rounded align-middle me-1">store</i>
         Volver a la Tienda
       </a>
-      <a class="btn btn-outline-dark mt-2 w-100"
-        href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree"
-        type="button">Documentation</a>
     </div>
   </div>
 </aside>

@@ -19,7 +19,7 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-3">Bienvenido 🎉</h1>
         <p class="text-gray-600 mb-6">Has iniciado sesión correctamente en tu cuenta.</p>
 
-        <a href="{{ url('/products') }}"
+        <a href="{{ url('/') }}"
            class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md transition">
             Ir a la tienda 🛒
         </a>
