@@ -103,7 +103,7 @@ class ProductController extends Controller
 
     public function table()
     {
-        $products = Product::with(['brand', 'category'])->get();
+        $products = Product::orderBy('id', 'desc')->paginate(15);
         
         return view('products.table', [
             'products' => $products

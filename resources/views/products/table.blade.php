@@ -5,6 +5,7 @@
 <div class ="card"
     
 <div class="card-body">
+    <h3> Products List </h3>
 
         <table class="table align-items-center mb-0">
             <thead>
@@ -56,6 +57,8 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{ $products->links() }}
     </div>
 </div>
 @endsection
