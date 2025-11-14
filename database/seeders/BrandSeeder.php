@@ -15,6 +15,22 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        Brand::factory(20)->create();
+        // Limpiar duplicados existentes primero
+        $brands = [
+            'Apple',
+            'Samsung',
+            'Sony',
+            'LG',
+            'Dell',
+            'HP',
+            'Lenovo',
+            'Asus',
+            'Acer',
+            'Microsoft'
+        ];
+
+        foreach ($brands as $brandName) {
+            Brand::firstOrCreate(['name' => $brandName]);
+        }
     }
 }

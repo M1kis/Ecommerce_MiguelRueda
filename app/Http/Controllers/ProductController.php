@@ -44,14 +44,44 @@ class ProductController extends Controller
         ],
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        return view("products.index", ["products" => $this->products]);
+        // Obtener todas las categorías para el selector
+        $allCategories = Category::whereHas('products')->get();
+        
+        // Obtener categoría seleccionada (si existe)
+        $selectedCategoryId = $request->get('category');
+        
+        // Productos destacados (los 8 más recientes)
+        $featuredProducts = Product::with(['category', 'brand'])
+            ->orderBy('created_at', 'desc')
+            ->limit(8)
+            ->get();
+        
+        // Si hay una categoría seleccionada, mostrar productos de esa categoría
+        if ($selectedCategoryId) {
+            $selectedCategory = Category::with(['products' => function($query) {
+                $query->with('brand')->orderBy('created_at', 'desc');
+            }])->find($selectedCategoryId);
+            
+            $categoryProducts = $selectedCategory ? $selectedCategory->products : collect();
+        } else {
+            $selectedCategory = null;
+            $categoryProducts = collect();
+        }
+
+        return view("products.index", [
+            "allCategories" => $allCategories,
+            "featuredProducts" => $featuredProducts,
+            "selectedCategory" => $selectedCategory,
+            "categoryProducts" => $categoryProducts,
+            "selectedCategoryId" => $selectedCategoryId
+        ]);
     }
 
     public function detail($id, $category = null)
     {
-        $product = $this->products[$id] ?? null;
+        $product = Product::with(['category', 'brand'])->find($id);
 
         if (!$product) {
             abort(404, 'Producto no encontrado');
@@ -78,7 +108,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0|max:9999999999',
             'category' => 'required|exists:categories,id',
             'brand' => 'required|exists:brand,id',
 
@@ -95,10 +125,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return response()->json([
-            'message' => 'Producto guardado correctamente',
-            'data' => $product
-        ]);
+        return redirect()->route('admin.products.table');
     }
 
     public function table()
@@ -108,6 +135,14 @@ class ProductController extends Controller
         return view('products.table', [
             'products' => $products
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin.products.table');
     }
 
 }

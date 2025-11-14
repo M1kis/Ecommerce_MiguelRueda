@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <h1 class="mb-4">Add New Category</h1>
+    <h1 class="mb-4">Add New Brand</h1>
 
     <div class="card">
         <div class="card-body">
@@ -16,23 +16,24 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.categories.store') }}" method="post" id="categoryForm">
+        <form action="{{ route('admin.brands.store') }}" method="post" id="brandForm">
             @csrf
             <div class="input-group input-group-outline mb-4">
                 <label class="form-label" for="name">Name</label>
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
             </div>
-            <button class="btn bg-gradient-success" type="submit" name="Save" id="submitBtn">Add Category</button>
+            <button class="btn bg-gradient-success" type="submit" name="Save" id="submitBtn">Add Brand</button>
         </form>
     </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('categoryForm').addEventListener('submit', function() {
+        document.getElementById('brandForm').addEventListener('submit', function() {
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Guardando...';
         });
     </script>
 @endsection
+

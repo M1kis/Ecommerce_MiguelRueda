@@ -9,8 +9,7 @@
 
         {{-- 🔹 Enlaces principales --}}
         <div class="flex items-center space-x-6">
-            <a href="{{ url('/products') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Inicio</a>
-            <a href="{{ url('/products/create') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Crear Producto</a>
+            <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Inicio</a>
             <a href="{{ url('/admin') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">Admin</a>
 
             {{-- 🔸 Zona de autenticación --}}

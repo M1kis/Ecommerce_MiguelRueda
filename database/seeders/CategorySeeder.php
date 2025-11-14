@@ -10,8 +10,23 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
+        // Limpiar duplicados existentes primero
+        $categories = [
+            'Phones',
+            'Computers',
+            'TVs',
+            'Appliances',
+            'Cameras',
+            'Audio',
+            'Wearables',
+            'Gaming',
+            'Networking',
+            'Accessories'
+        ];
 
-        Category::factory()->count(20)->create();
+        foreach ($categories as $categoryName) {
+            Category::firstOrCreate(['name' => $categoryName]);
+        }
     }
 
 

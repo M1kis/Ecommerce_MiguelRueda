@@ -23,7 +23,7 @@
 
       {{-- PRODUCTS --}}
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/products*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.products.create') }}">
+        <a class="nav-link {{ Request::is('admin/products*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.products.table') }}">
           <i class="material-symbols-rounded opacity-5">table_view</i>
           <span class="nav-link-text ms-1">Products</span>
         </a>
@@ -31,7 +31,7 @@
 
       {{-- CATEGORIES --}}
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/categories*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.categories.create') }}">
+        <a class="nav-link {{ Request::is('admin/categories*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.categories.table') }}">
           <i class="material-symbols-rounded opacity-5">receipt_long</i>
           <span class="nav-link-text ms-1">Categories</span>
         </a>
@@ -39,7 +39,7 @@
 
       {{-- BRANDS --}}
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/brands*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.brands.create') }}">
+        <a class="nav-link {{ Request::is('admin/brands*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" href="{{ route('admin.brands.table') }}">
           <i class="material-symbols-rounded opacity-5">view_in_ar</i>
           <span class="nav-link-text ms-1">Brands</span>
         </a>
@@ -50,10 +50,13 @@
 
   <div class="sidenav-footer position-absolute w-100 bottom-0">
     <div class="mx-3">
-      <a class="btn btn-outline-dark mt-4 w-100"
+      <a class="btn bg-gradient-primary w-100 mb-2" href="{{ route('products.index') }}" type="button">
+        <i class="material-symbols-rounded align-middle me-1">store</i>
+        Volver a la Tienda
+      </a>
+      <a class="btn btn-outline-dark mt-2 w-100"
         href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree"
         type="button">Documentation</a>
-      <a class="btn bg-gradient-dark w-100" href="#" type="button">Contact</a>
     </div>
   </div>
 </aside>
